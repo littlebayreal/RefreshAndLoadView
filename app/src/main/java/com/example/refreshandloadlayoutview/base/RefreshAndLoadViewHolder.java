@@ -56,7 +56,11 @@ public abstract class RefreshAndLoadViewHolder {
      * 下拉刷新控件
      */
     protected View mRefreshHeaderView;
-    /**
+	/**
+	 * 信息提示控件
+	 */
+	protected TipView mShowToastView;
+	/**
      * 上拉加载更多控件
      */
     protected View mLoadMoreFooterView;
@@ -198,7 +202,7 @@ public abstract class RefreshAndLoadViewHolder {
         }
         return mLoadMoreFooterView;
     }
-
+    public abstract TipView getShowToastView();
     /**
      * 获取头部下拉刷新控件
      *
@@ -318,7 +322,19 @@ public abstract class RefreshAndLoadViewHolder {
         }
         return 0;
     }
-
+	/**
+	 * 获取下拉刷新控件的高度，如果初始化时的高度和最后展开的最大高度不一致，需重写该方法返回最大高度
+	 *
+	 * @return
+	 */
+	public int getShowToastViewHeight() {
+		if (mShowToastView != null) {
+			// 测量下拉刷新控件的高度
+			mShowToastView.measure(0, 0);
+			return mShowToastView.getMeasuredHeight();
+		}
+		return 0;
+	}
     /**
      * 改变整个下拉刷新头部控件移动一定的距离（带动画），自定义刷新控件进入刷新状态前后的高度有变化时可以使用该方法（参考BGAStickinessRefreshView）
      *
