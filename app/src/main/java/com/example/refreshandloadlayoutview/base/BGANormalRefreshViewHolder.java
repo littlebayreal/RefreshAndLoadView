@@ -160,4 +160,36 @@ public class BGANormalRefreshViewHolder extends RefreshAndLoadViewHolder {
         mHeaderArrowIv.startAnimation(mDownAnim);
     }
 
+	@Override
+	public void changeToIdleForLoad() {
+	}
+
+	@Override
+	public void changeToPullUp() {
+		mFooterStatusTv.setText("上拉加载");
+		mFooterChrysanthemumIv.setVisibility(View.INVISIBLE);
+		mFooterChrysanthemumAd.stop();
+		mFooterArrowIv.setVisibility(View.VISIBLE);
+		mFooterArrowIv.setRotation(180);
+	}
+
+	@Override
+	public void changeToReleaseLoad() {
+		mFooterStatusTv.setText("释放加载");
+		mFooterChrysanthemumIv.setVisibility(View.INVISIBLE);
+		mFooterChrysanthemumAd.stop();
+		mFooterArrowIv.setVisibility(View.VISIBLE);
+//		mHeaderArrowIv.startAnimation(mUpAnim);
+	}
+
+	@Override
+	public void changeToLoading() {
+		mFooterStatusTv.setText(mRefreshingText);
+		// 必须把动画清空才能隐藏成功
+		mFooterArrowIv.clearAnimation();
+		mFooterArrowIv.setVisibility(View.INVISIBLE);
+		mFooterChrysanthemumIv.setVisibility(View.VISIBLE);
+		mFooterChrysanthemumAd.start();
+	}
+
 }

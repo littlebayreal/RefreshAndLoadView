@@ -9,10 +9,14 @@
 		android:id="@+id/rl"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-		android:gravity="center" />
+		<!--    <TextView-->
+		<!--        android:layout_width="match_parent"-->
+		<!--        android:layout_height="200dp"-->
+		<!--        android:text="Hello World!"-->
+		<!--		android:gravity="center" />-->
+		<android.support.v7.widget.RecyclerView
+			android:id="@+id/rv"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent" />
 	</com.example.refreshandloadlayoutview.base.RefreshAndLoadLayoutView>
 </LinearLayout>

@@ -22,6 +22,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewParent;
 import android.view.WindowManager;
@@ -169,24 +170,25 @@ public class BGARefreshScrollingUtil {
 //        return false;
 //    }
 
-//    public static boolean isRecyclerViewToBottom(RecyclerView recyclerView) {
-//        if (recyclerView != null) {
-//            RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
-//            if (manager == null || manager.getItemCount() == 0) {
-//                return false;
-//            }
-//
-//            if (manager instanceof LinearLayoutManager) {
-//                // 处理item高度超过一屏幕时的情况
-//                View lastVisibleChild = recyclerView.getChildAt(recyclerView.getChildCount() - 1);
-//                if (lastVisibleChild != null && lastVisibleChild.getMeasuredHeight() >= recyclerView.getMeasuredHeight()) {
-//                    if (android.os.Build.VERSION.SDK_INT < 14) {
-//                        return !(ViewCompat.canScrollVertically(recyclerView, 1) || recyclerView.getScrollY() < 0);
-//                    } else {
-//                        return !ViewCompat.canScrollVertically(recyclerView, 1);
-//                    }
-//                }
-//
+	public static boolean isRecyclerViewToBottom(RecyclerView recyclerView) {
+		if (recyclerView != null) {
+			RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
+			if (manager == null || manager.getItemCount() == 0) {
+				return false;
+			}
+
+			if (manager instanceof LinearLayoutManager) {
+				// 处理item高度超过一屏幕时的情况
+				View lastVisibleChild = recyclerView.getChildAt(recyclerView.getChildCount() - 1);
+//                && lastVisibleChild.getMeasuredHeight() >= recyclerView.getMeasuredHeight()
+				if (lastVisibleChild != null) {
+					if (android.os.Build.VERSION.SDK_INT < 14) {
+						return !(recyclerView.canScrollVertically(1) || recyclerView.getScrollY() < 0);
+					} else {
+						return !recyclerView.canScrollVertically(1);
+					}
+				}
+
 //                LinearLayoutManager layoutManager = (LinearLayoutManager) manager;
 //                if (layoutManager.findLastCompletelyVisibleItemPosition() == layoutManager.getItemCount() - 1) {
 //                    BGAStickyNavLayout stickyNavLayout = getStickyNavLayout(recyclerView);
@@ -208,20 +210,20 @@ public class BGARefreshScrollingUtil {
 //                        return true;
 //                    }
 //                }
-//            } else if (manager instanceof StaggeredGridLayoutManager) {
-//                StaggeredGridLayoutManager layoutManager = (StaggeredGridLayoutManager) manager;
-//
-//                int[] out = layoutManager.findLastCompletelyVisibleItemPositions(null);
-//                int lastPosition = layoutManager.getItemCount() - 1;
-//                for (int position : out) {
-//                    if (position == lastPosition) {
-//                        return true;
-//                    }
-//                }
-//            }
-//        }
-//        return false;
-//    }
+			} else if (manager instanceof StaggeredGridLayoutManager) {
+				StaggeredGridLayoutManager layoutManager = (StaggeredGridLayoutManager) manager;
+
+				int[] out = layoutManager.findLastCompletelyVisibleItemPositions(null);
+				int lastPosition = layoutManager.getItemCount() - 1;
+				for (int position : out) {
+					if (position == lastPosition) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
 
 
     public static void scrollToBottom(final ScrollView scrollView) {

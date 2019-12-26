@@ -131,7 +131,7 @@ public class TipView extends LinearLayout {
     }
 
     /**隐藏，收起*/
-    private void hide() {
+	public void hide() {
         TranslateAnimation hideAnim = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f,
                 Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF
                 ,0.0f, Animation.RELATIVE_TO_SELF,-1.0f);
@@ -156,7 +156,9 @@ public class TipView extends LinearLayout {
 
             }
         });
-    }/**
+	}
+
+	/**
 	 * 将sp值转换为px值，保证文字大小不变
 	 *
 	 * @param spValue
@@ -166,5 +168,4 @@ public class TipView extends LinearLayout {
 		final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
 		return (int) (spValue * fontScale + 0.5f);
 	}
-
 }

@@ -24,6 +24,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.refreshandloadlayoutview.R;
+
 /**
  * 作者:王浩 邮件:bingoogolapple@gmail.com
  * 创建时间:15/5/21 12:56
@@ -177,6 +179,7 @@ public abstract class RefreshAndLoadViewHolder {
         mTopAnimDuration = topAnimDuration;
     }
 
+	protected ImageView mFooterArrowIv;
     /**
      * 获取上拉加载更多控件，如果不喜欢这种上拉刷新风格可重写该方法实现自定义LoadMoreFooterView
      *
@@ -187,7 +190,7 @@ public abstract class RefreshAndLoadViewHolder {
             return null;
         }
         if (mLoadMoreFooterView == null) {
-//            mLoadMoreFooterView = View.inflate(mContext, R.layout.view_normal_refresh_footer, null);
+			mLoadMoreFooterView = View.inflate(mContext, R.layout.view_normal_refresh_footer, null);
             mLoadMoreFooterView.setBackgroundColor(Color.TRANSPARENT);
             if (mLoadMoreBackgroundColorRes != -1) {
                 mLoadMoreFooterView.setBackgroundResource(mLoadMoreBackgroundColorRes);
@@ -195,8 +198,9 @@ public abstract class RefreshAndLoadViewHolder {
             if (mLoadMoreBackgroundDrawableRes != -1) {
                 mLoadMoreFooterView.setBackgroundResource(mLoadMoreBackgroundDrawableRes);
             }
-//            mFooterStatusTv = (TextView) mLoadMoreFooterView.findViewById(R.id.tv_normal_refresh_footer_status);
-//            mFooterChrysanthemumIv = (ImageView) mLoadMoreFooterView.findViewById(R.id.iv_normal_refresh_footer_chrysanthemum);
+			mFooterStatusTv = mLoadMoreFooterView.findViewById(R.id.tv_normal_load_footer_status);
+			mFooterArrowIv = mLoadMoreFooterView.findViewById(R.id.iv_normal_load_footer_arrow);
+			mFooterChrysanthemumIv = mLoadMoreFooterView.findViewById(R.id.iv_normal_load_footer_chrysanthemum);
             mFooterChrysanthemumAd = (AnimationDrawable) mFooterChrysanthemumIv.getDrawable();
             mFooterStatusTv.setText(mLodingMoreText);
         }
@@ -243,7 +247,27 @@ public abstract class RefreshAndLoadViewHolder {
      */
     public abstract void onEndRefreshing();
 
-    /**
+	/**
+	 * 进入到普通状态
+	 */
+	public abstract void changeToIdleForLoad();
+
+	/**
+	 * 进入上拉状态
+	 */
+	public abstract void changeToPullUp();
+
+	/**
+	 * 进入释放加载状态
+	 */
+	public abstract void changeToReleaseLoad();
+
+	/**
+	 * 进入正在加载状态
+	 */
+	public abstract void changeToLoading();
+
+	/**
      * 手指移动距离与下拉刷新控件paddingTop移动距离的比值
      *
      * @return
@@ -320,10 +344,11 @@ public abstract class RefreshAndLoadViewHolder {
             mRefreshHeaderView.measure(0, 0);
             return mRefreshHeaderView.getMeasuredHeight();
         }
-        return 0;
-    }
+		return 0;
+	}
+
 	/**
-	 * 获取下拉刷新控件的高度，如果初始化时的高度和最后展开的最大高度不一致，需重写该方法返回最大高度
+	 * 获取显示控件的高度，如果初始化时的高度和最后展开的最大高度不一致，需重写该方法返回最大高度
 	 *
 	 * @return
 	 */
@@ -332,6 +357,15 @@ public abstract class RefreshAndLoadViewHolder {
 			// 测量下拉刷新控件的高度
 			mShowToastView.measure(0, 0);
 			return mShowToastView.getMeasuredHeight();
+		}
+		return 0;
+	}
+
+	public int getLoadMoreFooterViewHeight() {
+		if (mLoadMoreFooterView != null) {
+			// 测量下拉刷新控件的高度
+			mLoadMoreFooterView.measure(0, 0);
+			return mLoadMoreFooterView.getMeasuredHeight();
 		}
 		return 0;
 	}

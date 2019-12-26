@@ -2,22 +2,48 @@ package com.example.refreshandloadlayoutview;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
 
 import com.example.refreshandloadlayoutview.base.BGANormalRefreshViewHolder;
 import com.example.refreshandloadlayoutview.base.RefreshAndLoadLayoutView;
 import com.example.refreshandloadlayoutview.base.TipView;
 
-public class MainActivity extends AppCompatActivity {
-    private RefreshAndLoadLayoutView mRefreshLoadView;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+import java.util.ArrayList;
+import java.util.List;
 
-        mRefreshLoadView = findViewById(R.id.rl);
-		BGANormalRefreshViewHolder normalRefreshViewHolder = new BGANormalRefreshViewHolder(this,false);
-        mRefreshLoadView.setRefreshViewHolder(normalRefreshViewHolder);
-        mRefreshLoadView.setDelegate(new RefreshAndLoadLayoutView.RefreshAndLoadListener() {
+public class MainActivity extends AppCompatActivity {
+	private RefreshAndLoadLayoutView mRefreshLoadView;
+	private RecyclerView mRv;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+
+		mRefreshLoadView = findViewById(R.id.rl);
+		mRv = findViewById(R.id.rv);
+		mRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+		List<String> list = new ArrayList<>();
+		for (int i = 0; i < 20; i++) {
+			String s = "黑人问号脸" + i;
+			list.add(s);
+		}
+		MainAdapter mainAdapter = new MainAdapter(this, list);
+		mRv.setAdapter(mainAdapter);
+
+		mainAdapter.setmOnItemListener(new MainAdapter.onItemListener() {
+			@Override
+			public void onItemClick(View item, int position) {
+				Log.i("MainActivity", "item:" + position);
+			}
+		});
+//
+		BGANormalRefreshViewHolder normalRefreshViewHolder = new BGANormalRefreshViewHolder(this, true);
+		mRefreshLoadView.setRefreshViewHolder(normalRefreshViewHolder);
+		mRefreshLoadView.setDelegate(new RefreshAndLoadLayoutView.RefreshAndLoadListener() {
 			@Override
 			public void onRefresh(final RefreshAndLoadLayoutView refreshAndLoadLayoutView) {
 				new Thread(new Runnable() {
@@ -39,10 +65,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 			}
+
 			@Override
 			public void onLoad(RefreshAndLoadLayoutView refreshAndLoadLayoutView) {
 
 			}
 		});
-    }
+	}
 }
