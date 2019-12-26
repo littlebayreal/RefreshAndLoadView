@@ -91,7 +91,7 @@ public class RefreshAndLoadLayoutView extends LinearLayout {
 	 *
 	 * @param context
 	 */
-	private int pullUpType = PULL_UP_HAND;
+	private int pullUpType = PULL_UP_AUTO;
 
 	public static final int PULL_UP_HAND = 0;
 	public static final int PULL_UP_AUTO = 1;
@@ -221,6 +221,14 @@ public class RefreshAndLoadLayoutView extends LinearLayout {
 			mAbsListView = (AbsListView) mContentView;
 		} else if (mContentView instanceof RecyclerView) {
 			mRecyclerView = (RecyclerView) mContentView;
+			if (pullUpType == PULL_UP_HAND) {
+				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+				mRecyclerView.setLayoutParams(params);
+			} else {
+				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, 0);
+				params.weight = 1;
+				mRecyclerView.setLayoutParams(params);
+			}
 		} else if (mContentView instanceof ScrollView) {
 			mScrollView = (ScrollView) mContentView;
 		} else if (mContentView instanceof WebView) {
