@@ -67,8 +67,24 @@ public class MainActivity extends AppCompatActivity {
 			}
 
 			@Override
-			public void onLoad(RefreshAndLoadLayoutView refreshAndLoadLayoutView) {
-
+			public void onLoad(final RefreshAndLoadLayoutView refreshAndLoadLayoutView) {
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						try {
+							Thread.sleep(2000);
+							runOnUiThread(new Runnable() {
+								@Override
+								public void run() {
+									Log.v("MainActivity","结束加载");
+									refreshAndLoadLayoutView.endLoadingMore();
+								}
+							});
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+				}).start();
 			}
 		});
 	}
