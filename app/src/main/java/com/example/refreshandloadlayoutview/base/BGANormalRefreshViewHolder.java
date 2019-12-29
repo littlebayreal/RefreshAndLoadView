@@ -39,7 +39,8 @@ public class BGANormalRefreshViewHolder extends RefreshAndLoadViewHolder {
     private AnimationDrawable mHeaderChrysanthemumAd;
     private RotateAnimation mUpAnim;
     private RotateAnimation mDownAnim;
-
+    private RotateAnimation mLoadUpAnim;
+    private RotateAnimation mLoadDownAnim;
     private String mPullDownRefreshText = "下拉刷新";
     private String mReleaseRefreshText = "释放更新";
     private String mRefreshingText = "加载中...";
@@ -52,6 +53,11 @@ public class BGANormalRefreshViewHolder extends RefreshAndLoadViewHolder {
         super(context, isLoadingMoreEnabled);
         initAnimation();
     }
+    public BGANormalRefreshViewHolder(Context context, boolean isLoadingMoreEnabled,int pullType) {
+        super(context, isLoadingMoreEnabled,pullType);
+        initAnimation();
+    }
+
 	private void initAnimation() {
         mUpAnim = new RotateAnimation(0, -180, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         mUpAnim.setDuration(150);
@@ -59,6 +65,14 @@ public class BGANormalRefreshViewHolder extends RefreshAndLoadViewHolder {
 
         mDownAnim = new RotateAnimation(-180, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         mDownAnim.setFillAfter(true);
+
+        mLoadUpAnim = new RotateAnimation(0, -180, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        mLoadUpAnim.setDuration(150);
+        mLoadUpAnim.setFillAfter(true);
+
+        mLoadDownAnim = new RotateAnimation(-180, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        mLoadDownAnim.setDuration(150);
+        mLoadDownAnim.setFillAfter(true);
     }
 
     /**
@@ -94,6 +108,32 @@ public class BGANormalRefreshViewHolder extends RefreshAndLoadViewHolder {
 		}
 		return mShowToastView;
 	}
+    /**
+     * 获取上拉加载更多控件，如果不喜欢这种上拉刷新风格可重写该方法实现自定义LoadMoreFooterView
+     *
+     * @return
+     */
+    public View getLoadMoreFooterView() {
+        if (!mIsLoadingMoreEnabled) {
+            return null;
+        }
+        if (mLoadMoreFooterView == null) {
+            mLoadMoreFooterView = View.inflate(mContext, R.layout.view_normal_refresh_footer, null);
+            mLoadMoreFooterView.setBackgroundColor(Color.TRANSPARENT);
+            if (mLoadMoreBackgroundColorRes != -1) {
+                mLoadMoreFooterView.setBackgroundResource(mLoadMoreBackgroundColorRes);
+            }
+            if (mLoadMoreBackgroundDrawableRes != -1) {
+                mLoadMoreFooterView.setBackgroundResource(mLoadMoreBackgroundDrawableRes);
+            }
+            mFooterStatusTv = mLoadMoreFooterView.findViewById(R.id.tv_normal_load_footer_status);
+            mFooterArrowIv = mLoadMoreFooterView.findViewById(R.id.iv_normal_load_footer_arrow);
+            mFooterChrysanthemumIv = mLoadMoreFooterView.findViewById(R.id.iv_normal_load_footer_chrysanthemum);
+            mFooterChrysanthemumAd = (AnimationDrawable) mFooterChrysanthemumIv.getDrawable();
+            mFooterStatusTv.setText(mLodingMoreText);
+        }
+        return mLoadMoreFooterView;
+    }
     @Override
     public View getRefreshHeaderView() {
         if (mRefreshHeaderView == null) {
@@ -170,7 +210,7 @@ public class BGANormalRefreshViewHolder extends RefreshAndLoadViewHolder {
 		mFooterChrysanthemumIv.setVisibility(View.INVISIBLE);
 		mFooterChrysanthemumAd.stop();
 		mFooterArrowIv.setVisibility(View.VISIBLE);
-		mFooterArrowIv.setRotation(180);
+        mFooterArrowIv.startAnimation(mLoadUpAnim);
 	}
 
 	@Override
@@ -179,7 +219,7 @@ public class BGANormalRefreshViewHolder extends RefreshAndLoadViewHolder {
 		mFooterChrysanthemumIv.setVisibility(View.INVISIBLE);
 		mFooterChrysanthemumAd.stop();
 		mFooterArrowIv.setVisibility(View.VISIBLE);
-//		mHeaderArrowIv.startAnimation(mUpAnim);
+        mFooterArrowIv.startAnimation(mLoadDownAnim);
 	}
 
 	@Override

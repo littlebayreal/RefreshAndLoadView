@@ -23,7 +23,6 @@
 			android:layout_width="28dp"
 			android:layout_height="28dp"
 			android:layout_gravity="center"
-			android:rotation="180"
 			android:src="@mipmap/refresh_head_arrow" />
 
 		<ImageView

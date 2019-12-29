@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 			}
 		});
 //
-		BGANormalRefreshViewHolder normalRefreshViewHolder = new BGANormalRefreshViewHolder(this, true);
+		BGANormalRefreshViewHolder normalRefreshViewHolder = new BGANormalRefreshViewHolder(this, true,RefreshAndLoadLayoutView.PULL_UP_HAND);
 		mRefreshLoadView.setRefreshViewHolder(normalRefreshViewHolder);
 		mRefreshLoadView.setDelegate(new RefreshAndLoadLayoutView.RefreshAndLoadListener() {
 			@Override

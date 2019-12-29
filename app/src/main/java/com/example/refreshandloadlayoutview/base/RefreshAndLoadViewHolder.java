@@ -85,15 +85,15 @@ public abstract class RefreshAndLoadViewHolder {
     /**
      * 是否开启加载更多功能
      */
-    private boolean mIsLoadingMoreEnabled = true;
+    protected boolean mIsLoadingMoreEnabled = true;
     /**
      * 整个加载更多控件的背景颜色资源id
      */
-    private int mLoadMoreBackgroundColorRes = -1;
+    protected int mLoadMoreBackgroundColorRes = -1;
     /**
      * 整个加载更多控件的背景drawable资源id
      */
-    private int mLoadMoreBackgroundDrawableRes = -1;
+    protected int mLoadMoreBackgroundDrawableRes = -1;
     /**
      * 下拉刷新控件的背景颜色资源id
      */
@@ -108,14 +108,21 @@ public abstract class RefreshAndLoadViewHolder {
     private int mTopAnimDuration = 500;
 
     /**
+     * 上拉加载的方式
+     */
+    private int mPullType = RefreshAndLoadLayoutView.PULL_UP_HAND;
+    /**
      * @param context
      * @param isLoadingMoreEnabled 上拉加载更多是否可用
      */
     public RefreshAndLoadViewHolder(Context context, boolean isLoadingMoreEnabled) {
+        this(context,isLoadingMoreEnabled,RefreshAndLoadLayoutView.PULL_UP_HAND);
+    }
+    public RefreshAndLoadViewHolder(Context context,boolean isLoadingMoreEnabled,int pullType){
         mContext = context;
         mIsLoadingMoreEnabled = isLoadingMoreEnabled;
+        mPullType = pullType;
     }
-
     /**
      * 设置正在加载更多时的文本
      *
@@ -180,32 +187,7 @@ public abstract class RefreshAndLoadViewHolder {
     }
 
 	protected ImageView mFooterArrowIv;
-    /**
-     * 获取上拉加载更多控件，如果不喜欢这种上拉刷新风格可重写该方法实现自定义LoadMoreFooterView
-     *
-     * @return
-     */
-    public View getLoadMoreFooterView() {
-        if (!mIsLoadingMoreEnabled) {
-            return null;
-        }
-        if (mLoadMoreFooterView == null) {
-			mLoadMoreFooterView = View.inflate(mContext, R.layout.view_normal_refresh_footer, null);
-            mLoadMoreFooterView.setBackgroundColor(Color.TRANSPARENT);
-            if (mLoadMoreBackgroundColorRes != -1) {
-                mLoadMoreFooterView.setBackgroundResource(mLoadMoreBackgroundColorRes);
-            }
-            if (mLoadMoreBackgroundDrawableRes != -1) {
-                mLoadMoreFooterView.setBackgroundResource(mLoadMoreBackgroundDrawableRes);
-            }
-			mFooterStatusTv = mLoadMoreFooterView.findViewById(R.id.tv_normal_load_footer_status);
-			mFooterArrowIv = mLoadMoreFooterView.findViewById(R.id.iv_normal_load_footer_arrow);
-			mFooterChrysanthemumIv = mLoadMoreFooterView.findViewById(R.id.iv_normal_load_footer_chrysanthemum);
-            mFooterChrysanthemumAd = (AnimationDrawable) mFooterChrysanthemumIv.getDrawable();
-            mFooterStatusTv.setText(mLodingMoreText);
-        }
-        return mLoadMoreFooterView;
-    }
+    public abstract View getLoadMoreFooterView();
     public abstract TipView getShowToastView();
     /**
      * 获取头部下拉刷新控件
@@ -387,4 +369,7 @@ public abstract class RefreshAndLoadViewHolder {
         mRefreshLayout = refreshLayout;
     }
 
+        public int getMPullType() {
+        return mPullType;
+    }
 }
