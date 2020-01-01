@@ -1,8 +1,7 @@
-package com.example.refreshandloadlayoutview.base;
+package com.example.easyrefreshloadview.base;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
@@ -19,9 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
-import com.example.refreshandloadlayoutview.base.util.BGARefreshScrollingUtil;
-
-import org.xml.sax.HandlerBase;
+import com.example.easyrefreshloadview.base.util.BGARefreshScrollingUtil;
 
 /**
  * Created by LiTtleBayReal.
@@ -29,9 +26,9 @@ import org.xml.sax.HandlerBase;
  * Time: 20:19
  * Example:实现下拉刷新和上拉加载的控件 其中上拉加载有粘连模式和列表自动加载模式
  */
-public class RefreshAndLoadLayoutView extends LinearLayout {
-    private static final String TAG = RefreshAndLoadLayoutView.class.getSimpleName();
-    private RefreshAndLoadViewHolder mRefreshViewHolder;
+public class EasyRefreshLoadView extends LinearLayout {
+    private static final String TAG = EasyRefreshLoadView.class.getSimpleName();
+    private EasyRefreshLoadViewHolder mRefreshViewHolder;
     //获取触发控件移动事件的最短距离
     private int mTouchSlop = 0;
     private Handler mHandler;
@@ -118,15 +115,15 @@ public class RefreshAndLoadLayoutView extends LinearLayout {
     private View mContentView;
     private boolean isLoadMoreEnable = false;
 
-    public RefreshAndLoadLayoutView(Context context) {
+    public EasyRefreshLoadView(Context context) {
         this(context, null);
     }
 
-    public RefreshAndLoadLayoutView(Context context, @Nullable AttributeSet attrs) {
+    public EasyRefreshLoadView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public RefreshAndLoadLayoutView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public EasyRefreshLoadView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setOrientation(LinearLayout.VERTICAL);
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
@@ -144,7 +141,7 @@ public class RefreshAndLoadLayoutView extends LinearLayout {
         addView(mWholeHeaderView);
     }
 
-    public void setRefreshViewHolder(RefreshAndLoadViewHolder refreshViewHolder) {
+    public void setRefreshViewHolder(EasyRefreshLoadViewHolder refreshViewHolder) {
         mRefreshViewHolder = refreshViewHolder;
         mRefreshViewHolder.setRefreshLayout(this);
 
@@ -875,16 +872,16 @@ public class RefreshAndLoadLayoutView extends LinearLayout {
         /**
          * 刷新回调
          *
-         * @param refreshAndLoadLayoutView
+         * @param easyRefreshLoadView
          */
-        void onRefresh(RefreshAndLoadLayoutView refreshAndLoadLayoutView);
+        void onRefresh(EasyRefreshLoadView easyRefreshLoadView);
 
         /**
          * 加载回调
          *
-         * @param refreshAndLoadLayoutView
+         * @param easyRefreshLoadView
          */
-        void onLoad(RefreshAndLoadLayoutView refreshAndLoadLayoutView);
+        void onLoad(EasyRefreshLoadView easyRefreshLoadView);
     }
 
     public enum RefreshStatus {

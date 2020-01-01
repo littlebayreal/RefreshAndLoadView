@@ -1,4 +1,4 @@
-package com.example.refreshandloadlayoutview.base;
+package com.example.easyrefreshloadview.base;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
@@ -16,7 +16,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.refreshandloadlayoutview.R;
+import com.example.easyrefreshloadview.R;
 
 
 /**

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    <com.example.refreshandloadlayoutview.base.RefreshAndLoadLayoutView
+    <com.example.easyrefreshloadview.base.RefreshAndLoadLayoutView
 		android:id="@+id/rl"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
@@ -18,5 +18,5 @@
 			android:id="@+id/rv"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent" />
-	</com.example.refreshandloadlayoutview.base.RefreshAndLoadLayoutView>
+	</com.example.easyrefreshloadview.base.RefreshAndLoadLayoutView>
 </LinearLayout>

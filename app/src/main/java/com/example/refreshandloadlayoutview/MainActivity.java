@@ -7,15 +7,16 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
-import com.example.refreshandloadlayoutview.base.BGANormalRefreshViewHolder;
-import com.example.refreshandloadlayoutview.base.RefreshAndLoadLayoutView;
-import com.example.refreshandloadlayoutview.base.TipView;
+
+import com.example.easyrefreshloadview.base.BGANormalEasyRefreshViewHolder;
+import com.example.easyrefreshloadview.base.EasyRefreshLoadView;
+import com.example.easyrefreshloadview.base.EasyRefreshLoadViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-	private RefreshAndLoadLayoutView mRefreshLoadView;
+	private EasyRefreshLoadView mRefreshLoadView;
 	private RecyclerView mRv;
 
 	@Override
@@ -41,11 +42,11 @@ public class MainActivity extends AppCompatActivity {
 			}
 		});
 //
-		BGANormalRefreshViewHolder normalRefreshViewHolder = new BGANormalRefreshViewHolder(this, true,RefreshAndLoadLayoutView.PULL_UP_HAND);
+		EasyRefreshLoadViewHolder normalRefreshViewHolder = new BGANormalEasyRefreshViewHolder(this, true,EasyRefreshLoadView.PULL_UP_HAND);
 		mRefreshLoadView.setRefreshViewHolder(normalRefreshViewHolder);
-		mRefreshLoadView.setDelegate(new RefreshAndLoadLayoutView.RefreshAndLoadListener() {
+		mRefreshLoadView.setDelegate(new EasyRefreshLoadView.RefreshAndLoadListener() {
 			@Override
-			public void onRefresh(final RefreshAndLoadLayoutView refreshAndLoadLayoutView) {
+			public void onRefresh(final EasyRefreshLoadView refreshAndLoadLayoutView) {
 				new Thread(new Runnable() {
 					@Override
 					public void run() {
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 			}
 
 			@Override
-			public void onLoad(final RefreshAndLoadLayoutView refreshAndLoadLayoutView) {
+			public void onLoad(final EasyRefreshLoadView refreshAndLoadLayoutView) {
 				new Thread(new Runnable() {
 					@Override
 					public void run() {

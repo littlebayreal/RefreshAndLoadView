@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.refreshandloadlayoutview.base;
+package com.example.easyrefreshloadview.base;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
@@ -24,14 +23,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.refreshandloadlayoutview.R;
 
 /**
  * 作者:王浩 邮件:bingoogolapple@gmail.com
  * 创建时间:15/5/21 12:56
  * 描述:继承该抽象类实现响应的抽象方法，做出各种下拉刷新效果。参考BGANormalRefreshViewHolder、BGAStickinessRefreshViewHolder、BGAMoocStyleRefreshViewHolder、BGAMeiTuanRefreshViewHolder
  */
-public abstract class RefreshAndLoadViewHolder {
+public abstract class EasyRefreshLoadViewHolder {
     /**
      * 手指移动距离与下拉刷新控件paddingTop移动距离的比值
      */
@@ -53,7 +51,7 @@ public abstract class RefreshAndLoadViewHolder {
     /**
      * 下拉刷新上拉加载更多控件
      */
-    protected RefreshAndLoadLayoutView mRefreshLayout;
+    protected EasyRefreshLoadView mRefreshLayout;
     /**
      * 下拉刷新控件
      */
@@ -110,15 +108,15 @@ public abstract class RefreshAndLoadViewHolder {
     /**
      * 上拉加载的方式
      */
-    private int mPullType = RefreshAndLoadLayoutView.PULL_UP_HAND;
+    private int mPullType = EasyRefreshLoadView.PULL_UP_HAND;
     /**
      * @param context
      * @param isLoadingMoreEnabled 上拉加载更多是否可用
      */
-    public RefreshAndLoadViewHolder(Context context, boolean isLoadingMoreEnabled) {
-        this(context,isLoadingMoreEnabled,RefreshAndLoadLayoutView.PULL_UP_HAND);
+    public EasyRefreshLoadViewHolder(Context context, boolean isLoadingMoreEnabled) {
+        this(context,isLoadingMoreEnabled, EasyRefreshLoadView.PULL_UP_HAND);
     }
-    public RefreshAndLoadViewHolder(Context context,boolean isLoadingMoreEnabled,int pullType){
+    public EasyRefreshLoadViewHolder(Context context, boolean isLoadingMoreEnabled, int pullType){
         mContext = context;
         mIsLoadingMoreEnabled = isLoadingMoreEnabled;
         mPullType = pullType;
@@ -365,7 +363,7 @@ public abstract class RefreshAndLoadViewHolder {
      *
      * @param refreshLayout
      */
-    public void setRefreshLayout(RefreshAndLoadLayoutView refreshLayout) {
+    public void setRefreshLayout(EasyRefreshLoadView refreshLayout) {
         mRefreshLayout = refreshLayout;
     }
 

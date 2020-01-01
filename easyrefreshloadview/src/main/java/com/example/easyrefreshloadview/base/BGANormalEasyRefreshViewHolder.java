@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.refreshandloadlayoutview.base;
+package com.example.easyrefreshloadview.base;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -24,7 +24,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.refreshandloadlayoutview.R;
+import com.example.easyrefreshloadview.R;
 
 
 /**
@@ -32,7 +32,7 @@ import com.example.refreshandloadlayoutview.R;
  * 创建时间:15/5/21 13:05
  * 描述:类似新浪微博下拉刷新风格
  */
-public class BGANormalRefreshViewHolder extends RefreshAndLoadViewHolder {
+public class BGANormalEasyRefreshViewHolder extends EasyRefreshLoadViewHolder {
     private TextView mHeaderStatusTv;
     private ImageView mHeaderArrowIv;
     private ImageView mHeaderChrysanthemumIv;
@@ -49,11 +49,11 @@ public class BGANormalRefreshViewHolder extends RefreshAndLoadViewHolder {
      * @param context
      * @param isLoadingMoreEnabled 上拉加载更多是否可用
      */
-    public BGANormalRefreshViewHolder(Context context, boolean isLoadingMoreEnabled) {
+    public BGANormalEasyRefreshViewHolder(Context context, boolean isLoadingMoreEnabled) {
         super(context, isLoadingMoreEnabled);
         initAnimation();
     }
-    public BGANormalRefreshViewHolder(Context context, boolean isLoadingMoreEnabled,int pullType) {
+    public BGANormalEasyRefreshViewHolder(Context context, boolean isLoadingMoreEnabled, int pullType) {
         super(context, isLoadingMoreEnabled,pullType);
         initAnimation();
     }

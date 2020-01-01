@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.refreshandloadlayoutview.base.util;
+package com.example.easyrefreshloadview.base.util;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -22,9 +22,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewParent;
 import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.AbsListView;
